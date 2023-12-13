@@ -2,7 +2,7 @@ import {Rating} from "@mui/material"
 import { styled } from '@mui/material/styles';
 
 
-function WarcrowDieInput({value, setValue, color}) {
+function FightbirdRatingInput({value, setValue, color, icon, min, max}) {
 
   const StyledRating = styled(Rating)({
     '& .MuiRating-iconFilled': {
@@ -15,8 +15,8 @@ function WarcrowDieInput({value, setValue, color}) {
 
   return <StyledRating
     value={value}
-    min={0}
-    max={3}
+    min={min ?? 0}
+    max={max ?? 3}
     size="large"
     onChange={(event, newValue) => setValue(newValue || 0)}
     //icon={<FontAwesomeIcon fontSize="inherit" style={{padding: 2, color: colorMid}} icon={faDiceD20}/>}
@@ -24,4 +24,4 @@ function WarcrowDieInput({value, setValue, color}) {
   />
 }
 
-export default WarcrowDieInput;
+export default FightbirdRatingInput;

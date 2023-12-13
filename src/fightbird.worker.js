@@ -21,21 +21,16 @@ expert_blue_die = Die({-1: 5, 0: 3})
 expert_black_die = Die({-1: 4, 0: 4})
 
 
-def warcrow_f2f(red, orange, yellow, green, blue, black, expertise_a, expertise_b):
-    d_red = expert_red_die if expertise_a else red_die
-    d_orange = expert_orange_die if expertise_a else orange_die
-    d_yellow = expert_yellow_die if expertise_a else yellow_die
-    d_green = expert_green_die if expertise_b else green_die
-    d_blue = expert_blue_die if expertise_b else blue_die
-    d_black = expert_black_die if expertise_b else black_die
-    return Pool([
-        red @ d_red,
-        orange @ d_orange,
-        yellow @ d_yellow,
-        green @ d_green,
-        blue @ d_blue,
-        black @ d_black
-    ]).sum()
+def warcrow_f2f(red, orange, yellow, green, blue, black, hit_a, block_d, atk_expertise, def_expertise):
+    d_red = expert_red_die if atk_expertise else red_die
+    d_orange = expert_orange_die if atk_expertise else orange_die
+    d_yellow = expert_yellow_die if atk_expertise else yellow_die
+    d_green = expert_green_die if def_expertise else green_die
+    d_blue = expert_blue_die if def_expertise else blue_die
+    d_black = expert_black_die if def_expertise else black_die
+    return (hit_a - block_d +
+            red @ d_red + orange @ d_orange + yellow @ d_yellow +
+            green @ d_green + blue @ d_blue + black @ d_black)
 
 
 def format_result(raw_die):
@@ -55,11 +50,14 @@ def format_result(raw_die):
     return result
 
 
-def roll_dice(red_a, orange_a, yellow_a, green_a, blue_a, black_a, red_b, orange_b, yellow_b, green_b, blue_b, black_b,
-              expertise_a, expertise_b):
+def roll_dice(
+        red_a, orange_a, yellow_a, green_a, blue_a, black_a, hit_a, block_a, expertise_a,
+        red_b, orange_b, yellow_b, green_b, blue_b, black_b, hit_b, block_b, expertise_b):
     # Process both face to face rolls
-    attacker = highest(warcrow_f2f(red_a, orange_a, yellow_a, green_b, blue_b, black_b, expertise_a, expertise_b), 0)
-    defender = highest(warcrow_f2f(red_b, orange_b, yellow_b, green_a, blue_a, black_a, expertise_b, expertise_a), 0)
+    attacker = highest(warcrow_f2f(
+        red_a, orange_a, yellow_a, green_b, blue_b, black_b, hit_a, block_b, expertise_a, expertise_b), 0)
+    defender = highest(warcrow_f2f(
+        red_b, orange_b, yellow_b, green_a, blue_a, black_a, hit_b, block_a, expertise_b, expertise_a), 0)
 
     # Return the results
     return_object = {
@@ -91,9 +89,8 @@ async function initPyodide() {
 async function calculateProbability(p) {
   let pythonFunction = await self.pyodide.runPythonAsync(PYTHON_CODE) // eslint-disable-line no-restricted-globals
   return pythonFunction(
-    p.a.red, p.a.orange, p.a.yellow, p.a.green, p.a.blue, p.a.black,
-    p.b.red, p.b.orange, p.b.yellow, p.b.green, p.b.blue, p.b.black,
-    p.a.expertise, p.b.expertise
+    p.a.red, p.a.orange, p.a.yellow, p.a.green, p.a.blue, p.a.black, p.a.hit, p.a.block, p.a.expertise,
+    p.b.red, p.b.orange, p.b.yellow, p.b.green, p.b.blue, p.b.black, p.b.hit, p.b.block, p.b.expertise
   )
 }
 

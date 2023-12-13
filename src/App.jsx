@@ -1,7 +1,18 @@
 import 'react'
 import {useState, useEffect, useRef} from 'react'
-import {Container, CssBaseline, Grid, Card, CardContent, CardHeader, Typography, Checkbox, FormControlLabel, Link} from '@mui/material'
-import WarcrowDieInput from './WarcrowDieInput.jsx'
+import {
+  Container,
+  CssBaseline,
+  Grid,
+  Card,
+  CardContent,
+  CardHeader,
+  Typography,
+  Checkbox,
+  FormControlLabel,
+  Link,
+} from '@mui/material'
+import FightbirdRatingInput from './FightbirdRatingInput.jsx'
 import {clone} from "ramda";
 import WarcrowResultTable from "./WarcrowResultTable.jsx";
 
@@ -18,6 +29,8 @@ function App() {
   const [greenA, setGreenA] = useState(0);
   const [blueA, setBlueA] = useState(0);
   const [blackA, setBlackA] = useState(0);
+  const [hitA, setHitA] = useState(0);
+  const [blockA, setBlockA] = useState(0);
   const [expertiseA, setExpertiseA] = useState(false)
 
   // Inputs Player B
@@ -27,6 +40,8 @@ function App() {
   const [greenB, setGreenB] = useState(0);
   const [blueB, setBlueB] = useState(0);
   const [blackB, setBlackB] = useState(0);
+  const [hitB, setHitB] = useState(0);
+  const [blockB, setBlockB] = useState(0);
   const [expertiseB, setExpertiseB] = useState(false)
 
   // Outputs
@@ -68,14 +83,17 @@ function App() {
 
   useEffect(() => {
     rollDice();
-  }, [redA, orangeA, yellowA, greenA, blueA, blackA, redB, orangeB, yellowB, greenB, blueB, blackB, expertiseA, expertiseB]);
+  }, [
+    redA, orangeA, yellowA, greenA, blueA, blackA, hitA, blockA, expertiseA,
+    redB, orangeB, yellowB, greenB, blueB, blackB, hitB, blockB, expertiseB
+  ]);
 
 
   const rollDice = async () => {
     // get result from worker
     let parameters = {
-      a: {red: redA, yellow: yellowA, orange: orangeA, green: greenA, blue: blueA, black: blackA, expertise: expertiseA},
-      b: {red: redB, yellow: yellowB, orange: orangeB, green: greenB, blue: blueB, black: blackB, expertise: expertiseB}
+      a: {red: redA, yellow: yellowA, orange: orangeA, green: greenA, blue: blueA, black: blackA, hit: hitA, block: blockA, expertise: expertiseA},
+      b: {red: redB, yellow: yellowB, orange: orangeB, green: greenB, blue: blueB, black: blackB, hit: hitB, block: blockB, expertise: expertiseB}
     }
     await workerRef?.current?.postMessage?.({command: 'calculate', data: parameters})
   };
@@ -90,12 +108,12 @@ function App() {
             <Card>
               <CardHeader title='Attacker'/>
               <CardContent sx={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: "flex-start"}}>
-                <WarcrowDieInput value={redA} setValue={setRedA} color='red'/>
-                <WarcrowDieInput value={orangeA} setValue={setOrangeA} color='orange'/>
-                <WarcrowDieInput value={yellowA} setValue={setYellowA} color='yellow'/>
-                <WarcrowDieInput value={greenA} setValue={setGreenA} color='green'/>
-                <WarcrowDieInput value={blueA} setValue={setBlueA} color='blue'/>
-                <WarcrowDieInput value={blackA} setValue={setBlackA} color='black'/>
+                <FightbirdRatingInput value={redA} setValue={setRedA} color='red'/>
+                <FightbirdRatingInput value={orangeA} setValue={setOrangeA} color='orange'/>
+                <FightbirdRatingInput value={yellowA} setValue={setYellowA} color='yellow'/>
+                <FightbirdRatingInput value={greenA} setValue={setGreenA} color='green'/>
+                <FightbirdRatingInput value={blueA} setValue={setBlueA} color='blue'/>
+                <FightbirdRatingInput value={blackA} setValue={setBlackA} color='black'/>
                 <FormControlLabel
                   control={<Checkbox
                     checked={expertiseA}
@@ -105,6 +123,10 @@ function App() {
                   // value="Expertise"
                   labelPlacement="left"
                 />
+                <Typography>Automatic hits</Typography>
+                <FightbirdRatingInput value={hitA} setValue={setHitA} max={5} color='darkgrey'/>
+                <Typography>Automatic blocks</Typography>
+                <FightbirdRatingInput value={blockA} setValue={setBlockA} max={5} color='darkgrey'/>
               </CardContent>
             </Card>
           </Grid>
@@ -113,12 +135,12 @@ function App() {
             <Card>
               <CardHeader title='Defender'/>
               <CardContent sx={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: "flex-start"}}>
-                <WarcrowDieInput value={redB} setValue={setRedB} color='red'/>
-                <WarcrowDieInput value={orangeB} setValue={setOrangeB} color='orange'/>
-                <WarcrowDieInput value={yellowB} setValue={setYellowB} color='yellow'/>
-                <WarcrowDieInput value={greenB} setValue={setGreenB} color='green'/>
-                <WarcrowDieInput value={blueB} setValue={setBlueB} color='blue'/>
-                <WarcrowDieInput value={blackB} setValue={setBlackB} color='black'/>
+                <FightbirdRatingInput value={redB} setValue={setRedB} color='red'/>
+                <FightbirdRatingInput value={orangeB} setValue={setOrangeB} color='orange'/>
+                <FightbirdRatingInput value={yellowB} setValue={setYellowB} color='yellow'/>
+                <FightbirdRatingInput value={greenB} setValue={setGreenB} color='green'/>
+                <FightbirdRatingInput value={blueB} setValue={setBlueB} color='blue'/>
+                <FightbirdRatingInput value={blackB} setValue={setBlackB} color='black'/>
                 <FormControlLabel
                   control={<Checkbox
                     checked={expertiseB}
@@ -128,6 +150,10 @@ function App() {
                   // value="Expertise"
                   labelPlacement="left"
                 />
+                <Typography>Automatic hits</Typography>
+                <FightbirdRatingInput value={hitB} setValue={setHitB} max={5} color='darkgrey'/>
+                <Typography>Automatic blocks</Typography>
+                <FightbirdRatingInput value={blockB} setValue={setBlockB} max={5} color='darkgrey'/>
               </CardContent>
             </Card>
           </Grid>
