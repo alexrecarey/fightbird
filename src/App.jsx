@@ -1,7 +1,9 @@
 import 'react'
 import {useState, useEffect, useRef} from 'react'
-import {Container, Stack, CssBaseline, Rating, Grid, Card, CardContent, CardHeader, Typography} from '@mui/material'
+import {Container, CssBaseline, Grid, Card, CardContent, CardHeader, Typography} from '@mui/material'
 import WarcrowDieInput from './WarcrowDieInput.jsx'
+import {clone} from "ramda";
+import WarcrowResultTable from "./WarcrowResultTable.jsx";
 
 
 function App() {
@@ -26,7 +28,7 @@ function App() {
   const [blackB, setBlackB] = useState(0);
 
   // Outputs
-  const [f2fResults, setF2fResults] = useState(null);
+  const [icepoolResult, setIcepoolResult] = useState(null);
 
 
   // Worker message received
@@ -34,7 +36,7 @@ function App() {
     if (msg.data.command === 'result') {
       let value = msg.data.value;
       let cl = clone(value);
-      setF2fResults(cl);
+      setIcepoolResult(cl);
       setStatusMessage(`Done! Took ${msg.data.elapsed}ms to calculate all ${msg.data.totalRolls.toLocaleString()} possible rolls.`);
     } else if (msg.data.command === 'status') {
       if (msg.data.value === 'ready') {
@@ -112,12 +114,24 @@ function App() {
 
           <Grid item xs={12}>
             <Card>
-              <CardHeader title="Results"/>
+              <CardHeader title="Attacker wounds caused"/>
               <CardContent>
-                <Typography>Testing</Typography>
+                <WarcrowResultTable rows={icepoolResult?.attacker} />
               </CardContent>
             </Card>
+          </Grid>
 
+          <Grid item xs={12}>
+            <Card>
+              <CardHeader title="Defender wounds caused"/>
+              <CardContent>
+                <WarcrowResultTable rows={icepoolResult?.defender} />
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography>Status</Typography>
+            <Typography>{statusMessage}</Typography>
           </Grid>
         </Grid>
       </Container>

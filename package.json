@@ -17,6 +17,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.15.0",
     "jotai": "^2.6.0",
+    "ramda": "^0.29.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.20.1"

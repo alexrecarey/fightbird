@@ -33,6 +33,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@mui/material", "virtual:abe82f7fc74dc0f118ca5e5dc4deab601d9543e9c71f4d61111d7829c374ad3859d17e788ac91e989abf7e5fe07e3428e33198f15ec31940c40eca6401ec01d0#npm:5.15.0"],\
             ["@vitejs/plugin-react", "virtual:abe82f7fc74dc0f118ca5e5dc4deab601d9543e9c71f4d61111d7829c374ad3859d17e788ac91e989abf7e5fe07e3428e33198f15ec31940c40eca6401ec01d0#npm:4.2.1"],\
             ["jotai", "virtual:abe82f7fc74dc0f118ca5e5dc4deab601d9543e9c71f4d61111d7829c374ad3859d17e788ac91e989abf7e5fe07e3428e33198f15ec31940c40eca6401ec01d0#npm:2.6.0"],\
+            ["ramda", "npm:0.29.1"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:abe82f7fc74dc0f118ca5e5dc4deab601d9543e9c71f4d61111d7829c374ad3859d17e788ac91e989abf7e5fe07e3428e33198f15ec31940c40eca6401ec01d0#npm:18.2.0"],\
             ["react-router-dom", "virtual:abe82f7fc74dc0f118ca5e5dc4deab601d9543e9c71f4d61111d7829c374ad3859d17e788ac91e989abf7e5fe07e3428e33198f15ec31940c40eca6401ec01d0#npm:6.20.1"],\
@@ -1883,6 +1884,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@mui/material", "virtual:abe82f7fc74dc0f118ca5e5dc4deab601d9543e9c71f4d61111d7829c374ad3859d17e788ac91e989abf7e5fe07e3428e33198f15ec31940c40eca6401ec01d0#npm:5.15.0"],\
             ["@vitejs/plugin-react", "virtual:abe82f7fc74dc0f118ca5e5dc4deab601d9543e9c71f4d61111d7829c374ad3859d17e788ac91e989abf7e5fe07e3428e33198f15ec31940c40eca6401ec01d0#npm:4.2.1"],\
             ["jotai", "virtual:abe82f7fc74dc0f118ca5e5dc4deab601d9543e9c71f4d61111d7829c374ad3859d17e788ac91e989abf7e5fe07e3428e33198f15ec31940c40eca6401ec01d0#npm:2.6.0"],\
+            ["ramda", "npm:0.29.1"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:abe82f7fc74dc0f118ca5e5dc4deab601d9543e9c71f4d61111d7829c374ad3859d17e788ac91e989abf7e5fe07e3428e33198f15ec31940c40eca6401ec01d0#npm:18.2.0"],\
             ["react-router-dom", "virtual:abe82f7fc74dc0f118ca5e5dc4deab601d9543e9c71f4d61111d7829c374ad3859d17e788ac91e989abf7e5fe07e3428e33198f15ec31940c40eca6401ec01d0#npm:6.20.1"],\
@@ -2584,6 +2586,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["loose-envify", "npm:1.4.0"],\
             ["object-assign", "npm:4.1.1"],\
             ["react-is", "npm:16.13.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["ramda", [\
+        ["npm:0.29.1", {\
+          "packageLocation": "./.yarn/cache/ramda-npm-0.29.1-25eea2b737-df7c627597.zip/node_modules/ramda/",\
+          "packageDependencies": [\
+            ["ramda", "npm:0.29.1"]\
           ],\
           "linkType": "HARD"\
         }]\
