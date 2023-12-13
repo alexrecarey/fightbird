@@ -51,7 +51,7 @@ def roll_dice(redA, orangeA, yellowA, greenA, blueA, blackA, redB, orangeB, yell
     return_object = {
         'attacker': format_result(attacker),
         'defender': format_result(defender),
-        'total_rolls': attacker.denominator() * defender.denominator(),
+        'total_rolls': attacker.denominator() + defender.denominator(),
     }
 
     return to_js(return_object, dict_converter=js.Object.fromEntries)
