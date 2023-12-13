@@ -152,8 +152,10 @@ function App() {
           <Grid item xs={12}>
             <Typography>Status</Typography>
             <Typography>{statusMessage}</Typography>
-            <Typography>Alpha software! I'm not responsible for setting your PC on fire :) Please report bugs and errors
-            to Khepri at Discord or <Link href="https://github.com/alexrecarey/fightbird">at Github</Link></Typography>
+            <Typography>
+              Alpha software! I'm not responsible for setting your PC on fire :) Please report bugs or feedback
+              to Khepri at Discord or <Link href="https://github.com/alexrecarey/fightbird">at Github</Link>
+            </Typography>
           </Grid>
         </Grid>
       </Container>
