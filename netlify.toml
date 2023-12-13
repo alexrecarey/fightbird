@@ -1,6 +1,6 @@
 [build]
   publish = "dist"
-  command = "vite build"
+  command = "yarn vite build"
 
 [build.environment]
 NODE_VERSION = "18.12.1"
