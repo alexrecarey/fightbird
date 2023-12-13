@@ -13,15 +13,28 @@ green_die = Die({-2: 1, -1: 5, 0: 2})
 blue_die = Die({-1: 4, 0: 4})
 black_die = Die({-1: 2, 0: 6})
 
+expert_red_die = Die({2: 2, 1: 6})
+expert_orange_die = Die({1: 6, 0: 2})
+expert_yellow_die = Die({1: 5, 0: 3})
+expert_green_die = Die({-2: 1, -1: 6, 0: 1})
+expert_blue_die = Die({-1: 5, 0: 3})
+expert_black_die = Die({-1: 4, 0: 4})
 
-def warcrow_f2f(red, orange, yellow, green, blue, black):
+
+def warcrow_f2f(red, orange, yellow, green, blue, black, expertise_a, expertise_b):
+    d_red = expert_red_die if expertise_a else red_die
+    d_orange = expert_orange_die if expertise_a else orange_die
+    d_yellow = expert_yellow_die if expertise_a else yellow_die
+    d_green = expert_green_die if expertise_b else green_die
+    d_blue = expert_blue_die if expertise_b else blue_die
+    d_black = expert_black_die if expertise_b else black_die
     return Pool([
-        red @ red_die,
-        orange @ orange_die,
-        yellow @ yellow_die,
-        green @ green_die,
-        blue @ blue_die,
-        black @ black_die
+        red @ d_red,
+        orange @ d_orange,
+        yellow @ d_yellow,
+        green @ d_green,
+        blue @ d_blue,
+        black @ d_black
     ]).sum()
 
 
@@ -42,10 +55,11 @@ def format_result(raw_die):
     return result
 
 
-def roll_dice(redA, orangeA, yellowA, greenA, blueA, blackA, redB, orangeB, yellowB, greenB, blueB, blackB):
+def roll_dice(red_a, orange_a, yellow_a, green_a, blue_a, black_a, red_b, orange_b, yellow_b, green_b, blue_b, black_b,
+              expertise_a, expertise_b):
     # Process both face to face rolls
-    attacker = highest(warcrow_f2f(redA, orangeA, yellowA, greenB, blueB, blackB), 0)
-    defender = highest(warcrow_f2f(redB, orangeB, yellowB, greenA, blueA, blackA), 0)
+    attacker = highest(warcrow_f2f(red_a, orange_a, yellow_a, green_b, blue_b, black_b, expertise_a, expertise_b), 0)
+    defender = highest(warcrow_f2f(red_b, orange_b, yellow_b, green_a, blue_a, black_a, expertise_b, expertise_a), 0)
 
     # Return the results
     return_object = {
@@ -79,6 +93,7 @@ async function calculateProbability(p) {
   return pythonFunction(
     p.a.red, p.a.orange, p.a.yellow, p.a.green, p.a.blue, p.a.black,
     p.b.red, p.b.orange, p.b.yellow, p.b.green, p.b.blue, p.b.black,
+    p.a.expertise, p.b.expertise
   )
 }
 
