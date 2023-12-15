@@ -15,6 +15,8 @@ import {
 import FightbirdRatingInput from './FightbirdRatingInput.jsx'
 import {clone} from "ramda";
 import WarcrowResultTable from "./WarcrowResultTable.jsx";
+import HitFull from "./icons/HitFull.jsx";
+import BlockFull from "./icons/BlockFull.jsx";
 
 
 function App() {
@@ -124,9 +126,9 @@ function App() {
                   labelPlacement="left"
                 />
                 <Typography>Automatic hits</Typography>
-                <FightbirdRatingInput value={hitA} setValue={setHitA} max={5} color='darkgrey'/>
+                <FightbirdRatingInput value={hitA} setValue={setHitA} max={5} icon={HitFull}/>
                 <Typography>Automatic blocks</Typography>
-                <FightbirdRatingInput value={blockA} setValue={setBlockA} max={5} color='darkgrey'/>
+                <FightbirdRatingInput value={blockA} setValue={setBlockA} max={5} icon={BlockFull}/>
               </CardContent>
             </Card>
           </Grid>
@@ -151,9 +153,9 @@ function App() {
                   labelPlacement="left"
                 />
                 <Typography>Automatic hits</Typography>
-                <FightbirdRatingInput value={hitB} setValue={setHitB} max={5} color='darkgrey'/>
+                <FightbirdRatingInput value={hitB} setValue={setHitB} max={5} icon={HitFull}/>
                 <Typography>Automatic blocks</Typography>
-                <FightbirdRatingInput value={blockB} setValue={setBlockB} max={5} color='darkgrey'/>
+                <FightbirdRatingInput value={blockB} setValue={setBlockB} max={5} icon={BlockFull}/>
               </CardContent>
             </Card>
           </Grid>
@@ -176,11 +178,10 @@ function App() {
             </Card>
           </Grid>
           <Grid item xs={12}>
-            <Typography>Status</Typography>
-            <Typography>{statusMessage}</Typography>
+            <Typography>Status: {statusMessage}</Typography>
             <Typography>
-              Alpha software! I'm not responsible for setting your PC on fire :) Please report bugs or feedback
-              to Khepri at Discord or <Link href="https://github.com/alexrecarey/fightbird">at Github</Link>
+              Alpha software! Please report bugs or feedback to Khepri at Discord or
+              <Link href="https://github.com/alexrecarey/fightbird"> at Github</Link>
             </Typography>
           </Grid>
         </Grid>

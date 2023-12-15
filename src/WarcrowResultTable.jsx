@@ -19,7 +19,6 @@ function WarcrowResultTable({rows}) {
       <TableHead>
         <TableRow>
           <TableCell>Wounds</TableCell>
-          <TableCell align="right">Outcomes</TableCell>
           <TableCell align="right">Probability</TableCell>
           <TableCell align="right">Cumulative Probability</TableCell>
         </TableRow>
@@ -33,7 +32,6 @@ function WarcrowResultTable({rows}) {
             <TableCell component="th" scope="row">
               {row.wounds}
             </TableCell>
-            <TableCell align="right">{row.outcomes}</TableCell>
             <TableCell align="right">{formatPercentage(row.probability)}%</TableCell>
             <TableCell align="right">{formatPercentage(row.cumulative_probability)}%</TableCell>
           </TableRow>
