@@ -11,12 +11,17 @@ import {
   Checkbox,
   FormControlLabel,
   Link,
+  SvgIcon
 } from '@mui/material'
 import FightbirdRatingInput from './FightbirdRatingInput.jsx'
 import {clone} from "ramda";
 import WarcrowResultTable from "./WarcrowResultTable.jsx";
 import HitFull from "./icons/HitFull.jsx";
 import BlockFull from "./icons/BlockFull.jsx";
+import SwitchFull from "./icons/SwitchFull.jsx";
+import HitHollow from "./icons/HitHollow.jsx";
+import BlockHollow from "./icons/BlockHollow.jsx";
+import SwitchHollow from "./icons/SwitchHollow.jsx";
 
 
 function App() {
@@ -162,18 +167,45 @@ function App() {
 
           <Grid item xs={12}>
             <Card>
-              <CardHeader title="Attacker wounds caused"/>
+              <CardHeader title="Attacker results"/>
               <CardContent>
-                <WarcrowResultTable rows={icepoolResult?.attacker} />
+                <Typography>Uncancelled hits <SvgIcon component={HitFull} inheritViewBox sx={{fontSize: '1em'}}/></Typography>
+                <WarcrowResultTable rows={icepoolResult?.attacker?.hits} icon={HitFull}/>
+
+                <Typography>Switch <SvgIcon component={SwitchFull} inheritViewBox sx={{fontSize: '1em'}}/></Typography>
+                <WarcrowResultTable rows={icepoolResult?.attacker?.switches} icon={SwitchFull} />
+
+                <Typography>Hollow Hits <SvgIcon component={HitHollow} inheritViewBox sx={{fontSize: '1em'}}/></Typography>
+                <WarcrowResultTable rows={icepoolResult?.attacker?.hollow_hits} icon={HitHollow}/>
+
+                <Typography>Hollow Blocks <SvgIcon component={BlockHollow} inheritViewBox sx={{fontSize: '1em'}}/></Typography>
+                <WarcrowResultTable rows={icepoolResult?.attacker?.hollow_blocks} icon={BlockHollow}/>
+
+                <Typography>Hollow Switches <SvgIcon component={SwitchHollow} inheritViewBox sx={{fontSize: '1em'}}/></Typography>
+                <WarcrowResultTable rows={icepoolResult?.attacker?.hollow_switches} icon={SwitchHollow}/>
+
               </CardContent>
             </Card>
           </Grid>
 
           <Grid item xs={12}>
             <Card>
-              <CardHeader title="Defender wounds caused"/>
+              <CardHeader title="Defender results"/>
               <CardContent>
-                <WarcrowResultTable rows={icepoolResult?.defender} />
+                <Typography>Uncancelled hits <SvgIcon component={HitFull} inheritViewBox sx={{fontSize: '1em'}}/></Typography>
+                <WarcrowResultTable rows={icepoolResult?.defender?.hits} icon={HitFull}/>
+
+                <Typography>Switch <SvgIcon component={SwitchFull} inheritViewBox sx={{fontSize: '1em'}}/></Typography>
+                <WarcrowResultTable rows={icepoolResult?.defender?.switches} icon={SwitchFull}/>
+
+                <Typography>Hollow Hits <SvgIcon component={HitHollow} inheritViewBox sx={{fontSize: '1em'}}/></Typography>
+                <WarcrowResultTable rows={icepoolResult?.defender?.hollow_hits} icon={HitHollow}/>
+
+                <Typography>Hollow Blocks <SvgIcon component={BlockHollow} inheritViewBox sx={{fontSize: '1em'}}/></Typography>
+                <WarcrowResultTable rows={icepoolResult?.defender?.hollow_blocks} icon={BlockHollow}/>
+
+                <Typography>Hollow Switches <SvgIcon component={SwitchHollow} inheritViewBox sx={{fontSize: '1em'}}/></Typography>
+                <WarcrowResultTable rows={icepoolResult?.defender?.hollow_switches} icon={SwitchHollow}/>
               </CardContent>
             </Card>
           </Grid>

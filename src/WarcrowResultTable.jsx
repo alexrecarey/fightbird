@@ -3,6 +3,7 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import SvgIcon from '@mui/material/SvgIcon';
 import {pipe, multiply} from 'ramda';
 
 
@@ -10,7 +11,7 @@ export const oneDecimalPlace = (n, d=1) => n.toFixed(d);
 export const formatPercentage = pipe(multiply(100), oneDecimalPlace);
 
 
-function WarcrowResultTable({rows}) {
+function WarcrowResultTable({rows, icon}) {
   if (!rows) return <></>;
 
   return (
@@ -18,7 +19,7 @@ function WarcrowResultTable({rows}) {
            size="small">
       <TableHead>
         <TableRow>
-          <TableCell>Wounds</TableCell>
+          <TableCell>Outcome</TableCell>
           <TableCell align="right">Probability</TableCell>
           <TableCell align="right">Cumulative Probability</TableCell>
         </TableRow>
@@ -30,7 +31,7 @@ function WarcrowResultTable({rows}) {
             sx={{'&:last-child td, &:last-child th': {border: 0}}}
           >
             <TableCell component="th" scope="row">
-              {row.wounds}
+              {row.hits}<SvgIcon component={icon} inheritViewBox sx={{fontSize: '1em'}}/>
             </TableCell>
             <TableCell align="right">{formatPercentage(row.probability)}%</TableCell>
             <TableCell align="right">{formatPercentage(row.cumulative_probability)}%</TableCell>
